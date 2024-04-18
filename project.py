@@ -277,9 +277,15 @@ def callback_worker(call):
                 info_sport = json.load(file)
                 for sport in info_sport:
                     if sport['Наименование'] == call.data:
-                        bot.send_message(call.from_user.id, text=sport['Наименование'] + ':')
-                        
-                        bot.send_message(call.from_user.id, text=sport['Ссылка на информацию'])
+                        url_sport = sport['Ссылка на информацию']
+                        response = requests.get(url_sport)
+                        soup = BeautifulSoup(response.text, 'lxml')
+                        name_sport = soup.find_all('span', class_='mw-page-title-main')
+                        mini_info_sport = soup.find_all('p')
+                        for i in range(0, len(name_sport)):
+                            bot.send_message(call.from_user.id, text=('Название спорта: ' + name_sport[0].text))
+                            bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_sport[0].text))
+                            bot.send_message(call.from_user.id, text=sport['Ссылка на информацию'])
         if call.data == 'Перейти на следующую страницу':
             keyboard = types.InlineKeyboardMarkup()
             page += 1
@@ -314,9 +320,20 @@ def callback_worker(call):
                 info_game = json.load(file)
                 for game in info_game:
                     if game['Наименование'] == call.data:
-                        bot.send_message(call.from_user.id, text=game['Наименование'] + ':')
+                        url_game = game['Ссылка на информацию']
+                        response = requests.get(url_game)
+                        soup = BeautifulSoup(response.text, 'lxml')
+                        div = soup.find('div', class_='mw-content-ltr mw-parser-output')
+                        p = div.find('p')
+                        print('div', div)
+                        print('p', p.text)
 
-                        bot.send_message(call.from_user.id, text=game['Ссылка на информацию'])
+                        name_game = soup.find_all('h1', class_='firstHeading mw-first-heading')
+                        mini_info_game = soup.find_all('p')
+                        for i in range(0, len(name_game)):
+                            bot.send_message(call.from_user.id, text=('Название игры: ' + name_game[0].text))
+                            bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_game[0].text))
+                            bot.send_message(call.from_user.id, text=game['Ссылка на информацию'])
         if call.data == 'Перейти на следующую страницу':
             keyboard = types.InlineKeyboardMarkup()
             page += 1
