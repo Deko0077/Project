@@ -381,4 +381,3 @@ def callback_worker(call):
             bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
 bot.polling(none_stop = True, interval = 0)
 
-# Для гитхаб
