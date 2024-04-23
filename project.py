@@ -93,13 +93,12 @@ buttons_game = [
             types.InlineKeyboardButton(text='Among Us', callback_data='Among Us'),
             types.InlineKeyboardButton(text='Poppy Playtime', callback_data='Poppy Playtime'),
             types.InlineKeyboardButton(text='S.T.A.L.K.E.R', callback_data='S.T.A.L.K.E.R'),
-            types.InlineKeyboardButton(text='SCP: Secret Laboratory', callback_data='SCP: Secret Laboratory'),
             types.InlineKeyboardButton(text='eFootbal™', callback_data='eFootbal™'),
             types.InlineKeyboardButton(text='The Witcher', callback_data='The Witcher'),
             types.InlineKeyboardButton(text='Diablo', callback_data='Diablo'),
             types.InlineKeyboardButton(text='DOOM', callback_data='DOOM'),
-            types.InlineKeyboardButton(text='Mortal Combat', callback_data='Mortal Combat'),
-            types.InlineKeyboardButton(text='Takken', callback_data='Takken'),
+            types.InlineKeyboardButton(text='Mortal Kombat', callback_data='Mortal Kombat'),
+            types.InlineKeyboardButton(text='Tekken', callback_data='Tekken'),
             types.InlineKeyboardButton(text='The Last of Us', callback_data='The Last of Us'),
             types.InlineKeyboardButton(text='The Walking Dead', callback_data='The Walking Dead'),
             types.InlineKeyboardButton(text='Resident Evil', callback_data='Resident Evil'),
@@ -107,16 +106,18 @@ buttons_game = [
             types.InlineKeyboardButton(text='Unrecord', callback_data='Unrecord'),
             types.InlineKeyboardButton(text='Gran Turismo', callback_data='Gran Turismo'),
             types.InlineKeyboardButton(text='Смута', callback_data='Смута'),
-            types.InlineKeyboardButton(text='Hpgwards Legacy', callback_data='Hpgwards Legacy'),
+            types.InlineKeyboardButton(text='Little Nightmares', callback_data='Little Nightmares'),
             types.InlineKeyboardButton(text='Elden Ring', callback_data='Elden Ring'),
             types.InlineKeyboardButton(text='The elder scrolls V Skyrim', callback_data='The elder scrolls V Skyrim'),
             types.InlineKeyboardButton(text='Final Fantasy', callback_data='Final Fantasy'),
             types.InlineKeyboardButton(text='The Legend of Zelda', callback_data='The Legend of Zelda'),
-            types.InlineKeyboardButton(text='Genshin Inpact', callback_data='Genshin Inpact'),
-            types.InlineKeyboardButton(text='Marvels Spider Man', callback_data='Marvels Spider Man'),
+            types.InlineKeyboardButton(text='Genshin Impact', callback_data='Genshin Impact'),
+            types.InlineKeyboardButton(text='Helldivers 2', callback_data='Helldivers 2'),
             types.InlineKeyboardButton(text='Dota 2', callback_data='Dota 2'),
             types.InlineKeyboardButton(text='Hollow Knight', callback_data='Hollow Knight'),
-            types.InlineKeyboardButton(text='Call f Duty: Warzon', callback_data='Call f Duty: Warzon')
+            types.InlineKeyboardButton(text='Call of Duty: Warzon', callback_data='Call of Duty: Warzon'),
+            types.InlineKeyboardButton(text='Hello Neighbor', callback_data='Hello Neighbor')
+
 ]
 
 
@@ -159,8 +160,8 @@ buttons_auto = [
             types.InlineKeyboardButton(text='Ferrari 812 Superfast', callback_data='Ferrari 812 Superfast'),
             types.InlineKeyboardButton(text='Ferrari Roma', callback_data='Ferrari Roma'),
             types.InlineKeyboardButton(text='Ferrari SF90 Stradale', callback_data='Ferrari SF90 Stradale'),
-            types.InlineKeyboardButton(text='Ferrari 812 GTS', callback_data='Ferrari 812 GTS'),
-            types.InlineKeyboardButton(text='LADA Nila Travel', callback_data='LADA Nila Travel'),
+            types.InlineKeyboardButton(text='Ferrari Enzo', callback_data='Ferrari Enzo'),
+            types.InlineKeyboardButton(text='LADA Niva Travel', callback_data='LADA Niva Travel'),
             types.InlineKeyboardButton(text='LADA Vesta', callback_data='LADA Vesta'),
             types.InlineKeyboardButton(text='LADA Granta Cross', callback_data='LADA Granta Cross'),
             types.InlineKeyboardButton(text='LADA Granta Sport', callback_data='LADA Granta Sport'),
@@ -219,7 +220,7 @@ def get_message(message):
             
 *Разработчики:*
             
-- @DekoSans - Данила Демченко
+- @DanilaDemchenko - Данила Демченко
 - @daniilkiin - Данил Лаптев
             
 *Если Бот вам не отвечает, перезапустите его командой /start или обратитесь к разработчикам данного бота.*
@@ -280,12 +281,11 @@ def callback_worker(call):
                         url_sport = sport['Ссылка на информацию']
                         response = requests.get(url_sport)
                         soup = BeautifulSoup(response.text, 'lxml')
-                        name_sport = soup.find_all('span', class_='mw-page-title-main')
-                        mini_info_sport = soup.find_all('p')
-                        for i in range(0, len(name_sport)):
-                            bot.send_message(call.from_user.id, text=('Название спорта: ' + name_sport[0].text))
-                            bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_sport[0].text))
-                            bot.send_message(call.from_user.id, text=sport['Ссылка на информацию'])
+                        mini_info_sport = soup.select('div.mw-content-ltr.mw-parser-output > p')
+                        name_sport = soup.find('span', class_='mw-page-title-main')
+                        bot.send_message(call.from_user.id, text=('Название спорта: ' + name_sport.text))
+                        bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_sport[0].text))
+                        bot.send_message(call.from_user.id, text=sport['Ссылка на информацию'])
         if call.data == 'Перейти на следующую страницу':
             keyboard = types.InlineKeyboardMarkup()
             page += 1
@@ -323,17 +323,12 @@ def callback_worker(call):
                         url_game = game['Ссылка на информацию']
                         response = requests.get(url_game)
                         soup = BeautifulSoup(response.text, 'lxml')
-                        div = soup.find('div', class_='mw-content-ltr mw-parser-output')
-                        p = div.find('p')
-                        print('div', div)
-                        print('p', p.text)
-
-                        name_game = soup.find_all('h1', class_='firstHeading mw-first-heading')
-                        mini_info_game = soup.find_all('p')
-                        for i in range(0, len(name_game)):
-                            bot.send_message(call.from_user.id, text=('Название игры: ' + name_game[0].text))
-                            bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_game[0].text))
-                            bot.send_message(call.from_user.id, text=game['Ссылка на информацию'])
+                        # div = soup.find('div', class_='mw-content-ltr mw-parser-output')
+                        mini_info_game = soup.select('div.mw-content-ltr.mw-parser-output > p')
+                        name_game = soup.find('h1', class_='firstHeading mw-first-heading')
+                        bot.send_message(call.from_user.id, text=('Название игры: ' + name_game.text))
+                        bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_game[0].text))
+                        bot.send_message(call.from_user.id, text=game['Ссылка на информацию'])
         if call.data == 'Перейти на следующую страницу':
             keyboard = types.InlineKeyboardMarkup()
             page += 1
@@ -368,8 +363,14 @@ def callback_worker(call):
                 info_transport = json.load(file)
                 for auto in info_transport:
                     if auto['Наименование'] == call.data:
-                        bot.send_message(call.from_user.id, text=auto['Наименование'] + ':')
-
+                        url_auto = auto['Ссылка на информацию']
+                        response = requests.get(url_auto)
+                        soup = BeautifulSoup(response.text, 'lxml')
+                        # div = soup.find('div', class_='mw-content-ltr mw-parser-output')
+                        mini_info_auto = soup.select('div.mw-content-ltr.mw-parser-output > p')
+                        name_auto = soup.find('h1', class_='firstHeading mw-first-heading')
+                        bot.send_message(call.from_user.id, text=('Название игры: ' + name_auto.text))
+                        bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_auto[0].text))
                         bot.send_message(call.from_user.id, text=auto['Ссылка на информацию'])
         if call.data == 'Перейти на следующую страницу':
             keyboard = types.InlineKeyboardMarkup()

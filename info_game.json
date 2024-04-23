@@ -104,10 +104,6 @@
     "Ссылка на информацию": "https://ru.wikipedia.org/wiki/S.T.A.L.K.E.R._(%D1%81%D0%B5%D1%80%D0%B8%D1%8F_%D0%B8%D0%B3%D1%80)"
   },
     {
-    "Наименование": "SCP: Secret Laboratory",
-    "Ссылка на информацию": "https://scp-secret-laboratory.fandom.com/ru/wiki/SCP:_Secret_Laboratory_%D0%B2%D0%B8%D0%BA%D0%B8"
-  },
-    {
     "Наименование": "eFootbal™",
     "Ссылка на информацию": "https://ru.wikipedia.org/wiki/EFootball_(%D1%81%D0%B5%D1%80%D0%B8%D1%8F_%D0%B8%D0%B3%D1%80)"
   },
@@ -124,11 +120,11 @@
     "Ссылка на информацию": "https://ru.wikipedia.org/wiki/Doom_(%D1%81%D0%B5%D1%80%D0%B8%D1%8F_%D0%B8%D0%B3%D1%80)"
   },
     {
-    "Наименование": "Mortal Combat",
+    "Наименование": "Mortal Kombat",
     "Ссылка на информацию": "https://ru.wikipedia.org/wiki/Mortal_Kombat"
   },
     {
-    "Наименование": "Takken",
+    "Наименование": "Tekken",
     "Ссылка на информацию": "https://ru.wikipedia.org/wiki/Tekken_(%D1%84%D1%80%D0%B0%D0%BD%D1%88%D0%B8%D0%B7%D0%B0)"
   },
     {
@@ -160,8 +156,8 @@
     "Ссылка на информацию": "https://ru.wikipedia.org/wiki/%D0%A1%D0%BC%D1%83%D1%82%D0%B0_(%D0%B8%D0%B3%D1%80%D0%B0)"
   },
     {
-    "Наименование": "Hpgwards Legacy",
-    "Ссылка на информацию": "https://ru.wikipedia.org/wiki/Hogwarts_Legacy"
+    "Наименование": "Little Nightmares",
+    "Ссылка на информацию": "https://ru.wikipedia.org/wiki/Little_Nightmares"
   },
     {
     "Наименование": "Elden Ring",
@@ -180,12 +176,12 @@
     "Ссылка на информацию": "https://ru.wikipedia.org/wiki/The_Legend_of_Zelda"
   },
     {
-    "Наименование": "Genshin Inpact",
+    "Наименование": "Genshin Impact",
     "Ссылка на информацию": "https://ru.wikipedia.org/wiki/Genshin_Impact"
   },
     {
-    "Наименование": "Marvel's Spider Man",
-    "Ссылка на информацию": "https://ru.wikipedia.org/wiki/Spider-Man_(%D1%81%D0%B5%D1%80%D0%B8%D1%8F_%D0%B8%D0%B3%D1%80_Insomniac_Games)"
+    "Наименование": "Helldivers 2",
+    "Ссылка на информацию": "https://ru.wikipedia.org/wiki/Helldivers_2"
   },
     {
     "Наименование": "Dota 2",
@@ -196,7 +192,12 @@
     "Ссылка на информацию": "https://ru.wikipedia.org/wiki/Hollow_Knight"
   },
     {
-    "Наименование": "Call f Duty: Warzon",
+    "Наименование": "Call of Duty: Warzon",
     "Ссылка на информацию": "https://ru.wikipedia.org/wiki/Call_of_Duty:_Warzone"
+  },
+  {
+
+    "Наименование": "Hello Neighbor",
+    "Ссылка на информацию": "https://ru.wikipedia.org/wiki/Hello_Neighbor"
   }
 ]
