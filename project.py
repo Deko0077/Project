@@ -307,9 +307,12 @@ def callback_worker(call):
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
         else:
             keyboard = types.InlineKeyboardMarkup()
-            for i in range(limit):
+            for i in range(page * limit - limit, min(len(buttons_sport), page * limit)):
                 keyboard.add(buttons_sport[i])
-            keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'),)
+            if page != 1:
+                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+            if page * limit < len(buttons_sport):
+                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
             bot.send_message(call.from_user.id, '*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
 
 
@@ -350,9 +353,12 @@ def callback_worker(call):
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
         else:
             keyboard = types.InlineKeyboardMarkup()
-            for i in range(limit):
+            for i in range(page * limit - limit, min(len(buttons_game), page * limit)):
                 keyboard.add(buttons_game[i])
-            keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'),)
+            if page != 1:
+                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+            if page * limit < len(buttons_game):
+                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
             bot.send_message(call.from_user.id, '*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
 
 
@@ -393,9 +399,12 @@ def callback_worker(call):
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
         else:
             keyboard = types.InlineKeyboardMarkup()
-            for i in range(limit):
+            for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
                 keyboard.add(buttons_auto[i])
-            keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'),)
+            if page != 1:
+                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+            if page * limit < len(buttons_auto):
+                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
             bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
 bot.polling(none_stop = True, interval = 0)
 
