@@ -402,7 +402,7 @@ def callback_worker(call):
             for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
                 keyboard.add(buttons_auto[i])
             if page != 1:
-                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице',  callback_data='Вернуться к предыдущей странице'))
             if page * limit < len(buttons_auto):
                 keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
             bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
