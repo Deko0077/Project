@@ -405,6 +405,6 @@ def callback_worker(call):
                 keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
             if page * limit < len(buttons_auto):
                 keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
-            bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
+            bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*',  parse_mode='Markdown', reply_markup=keyboard)
 bot.polling(none_stop = True, interval = 0)
 
