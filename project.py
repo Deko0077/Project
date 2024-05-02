@@ -232,12 +232,12 @@ def get_message(message):
 
         keyboard = types.InlineKeyboardMarkup()
 
-        button1 = types.InlineKeyboardButton(text='Спорт', callback_data='Спорт')
-        button2 = types.InlineKeyboardButton(text='Видео игры', callback_data='Видео игры')
-        button3 = types.InlineKeyboardButton(text='Транспорт', callback_data='Транспорт')
+        file_themes = open('themes_example.json', 'r+', encoding='utf-8')
+        full_theme = json.load(file_themes)
+        for theme in list(full_theme.keys()):
+            button_theme = types.InlineKeyboardButton(text=theme, callback_data='theme_'+theme)
+            keyboard.add(button_theme)
 
-
-        keyboard.add(button1, button2, button3)
         bot.send_message(message.from_user.id, '*Выберите тему:*', parse_mode='Markdown', reply_markup=keyboard)
         print(message.from_user.id, message.text)
 
@@ -406,5 +406,11 @@ def callback_worker(call):
             if page * limit < len(buttons_auto):
                 keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
             bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*',  parse_mode='Markdown', reply_markup=keyboard)
+    if active_theme == 'theme':
+        for button in button_theme:
+            if call.data == button.callback_data:
+
 bot.polling(none_stop = True, interval = 0)
+
+
 
