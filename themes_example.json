@@ -1,6 +1,6 @@
 {
   "theme": {
-    "questions": {
+    "question": {
       "who am i?": {
         "otvets": {
           "nobody": {},

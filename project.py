@@ -406,9 +406,20 @@ def callback_worker(call):
             if page * limit < len(buttons_auto):
                 keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
             bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*',  parse_mode='Markdown', reply_markup=keyboard)
+
+
     if active_theme == 'theme':
-        for button in button_theme:
-            if call.data == button.callback_data:
+        keyboard = types.InlineKeyboardMarkup()
+
+        file_themes = open('themes_example.json', 'r+', encoding='utf-8')
+        full_theme = json.load(file_themes)
+        for questions in list(full_theme['theme']['question']):
+            button_questions = types.InlineKeyboardButton(text= questions, callback_data= questions)
+            keyboard.add(button_questions)
+
+        bot.send_message(call.from_user.id, '*Выберите тему:*', parse_mode='Markdown', reply_markup=keyboard)
+
+
 
 bot.polling(none_stop = True, interval = 0)
 
