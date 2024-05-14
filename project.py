@@ -12,6 +12,8 @@ page = 1
 limit = 10
 
 active_theme = None
+active_question = None
+active_informations = None
 
 buttons_sport = [
             types.InlineKeyboardButton(text='Биатлон', callback_data='Биатлон'),
@@ -246,9 +248,9 @@ def get_message(message):
         keyboard = types.InlineKeyboardMarkup()
 
         themes_buttons = [
-            types.InlineKeyboardButton(text='Спорт', callback_data='theme_Спорт'),
-            types.InlineKeyboardButton(text='Видео игры', callback_data='theme_Видео игры'),
-            types.InlineKeyboardButton(text='Транспорт', callback_data='theme_Транспорт')
+            types.InlineKeyboardButton(text='Спорт', callback_data='informations_Спорт'),
+            types.InlineKeyboardButton(text='Видео игры', callback_data='informations_Видео игры'),
+            types.InlineKeyboardButton(text='Транспорт', callback_data='informations_Транспорт')
         ]
         for i in range(len(themes_buttons)):
             keyboard.add(themes_buttons[i])
@@ -266,12 +268,38 @@ def get_message(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_worker(call):
-    global page, active_theme, limit
+    global page, active_theme, active_informations, limit
 
     if call.data.startswith('theme'):
         active_theme = call.data.split('_')[1]
+        keyboard = types.InlineKeyboardMarkup()
 
-    if active_theme == 'Спорт':
+        file_themes = open('themes_example.json', 'r+', encoding='utf-8')
+        full_theme = json.load(file_themes)
+        for questions in list(full_theme['theme']['question'].keys()):
+            button_questions = types.InlineKeyboardButton(text=questions, callback_data='question_'+questions)
+            keyboard.add(button_questions)
+
+        bot.send_message(call.from_user.id, '*Выберите вопрос:*', parse_mode='Markdown', reply_markup=keyboard)
+
+
+    if call.data.startswith('question'):
+        active_question = call.data.split('_')[1]
+        keyboard = types.InlineKeyboardMarkup()
+
+        file_themes = open('themes_example.json', 'r+', encoding='utf-8')
+        full_theme = json.load(file_themes)
+        for otvets in full_theme[active_theme]['question'][active_question]['otvets'].keys():
+            button_otvets = types.InlineKeyboardButton(text=otvets, callback_data='otvets_' + otvets)
+            keyboard.add(button_otvets)
+
+        bot.send_message(call.from_user.id, '*Выберите  ответ:*', parse_mode='Markdown', reply_markup=keyboard)
+
+    if call.data.startswith('informations'):
+        active_informations = call.data.split('_')[1]
+        keyboard = types.InlineKeyboardMarkup()
+
+    if active_informations == 'Спорт':
         for button in buttons_sport:
             if call.data == button.callback_data:
                 file = open('info_sport.json', 'r', encoding='utf-8')
@@ -316,7 +344,7 @@ def callback_worker(call):
             bot.send_message(call.from_user.id, '*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
 
 
-    if active_theme == 'Видео игры':
+    if active_informations == 'Видео игры':
         for button in buttons_game:
             if call.data == button.callback_data:
                 file = open('info_game.json', 'r', encoding='utf-8')
@@ -362,7 +390,7 @@ def callback_worker(call):
             bot.send_message(call.from_user.id, '*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
 
 
-    if active_theme == 'Транспорт':
+    if active_informations == 'Транспорт':
         for button in buttons_auto:
             if call.data == button.callback_data:
                 file = open('info_transport.json', 'r', encoding='utf-8')
@@ -406,20 +434,6 @@ def callback_worker(call):
             if page * limit < len(buttons_auto):
                 keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
             bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*',  parse_mode='Markdown', reply_markup=keyboard)
-
-
-    if active_theme == 'theme':
-        keyboard = types.InlineKeyboardMarkup()
-
-        file_themes = open('themes_example.json', 'r+', encoding='utf-8')
-        full_theme = json.load(file_themes)
-        for questions in list(full_theme['theme']['question']):
-            button_questions = types.InlineKeyboardButton(text= questions, callback_data= questions)
-            keyboard.add(button_questions)
-
-        bot.send_message(call.from_user.id, '*Выберите тему:*', parse_mode='Markdown', reply_markup=keyboard)
-
-
 
 bot.polling(none_stop = True, interval = 0)
 
