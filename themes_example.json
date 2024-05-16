@@ -14,7 +14,9 @@
       },
       "somebody who?": {
         "otvets": {
-          "superman": {},
+          "superman": {
+            "question": "What?"
+          },
           "superwoman": {},
           "lemon": {}
         }
@@ -28,11 +30,17 @@
           "i dont know": {
           }
         }
+      },
+      "What?": {
+        "otvets": {
+          "ok": {},
+          "no": {}
+        }
       }
     }
   },
   "Теннис": {
-    "questions": {
+    "question": {
       "who am i?": {
         "otvets": {
           "nobody": {},

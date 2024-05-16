@@ -13,6 +13,7 @@ limit = 10
 
 active_theme = None
 active_question = None
+active_otvets = None
 active_informations = None
 
 buttons_sport = [
@@ -185,7 +186,7 @@ def get_message(message):
         bot.set_my_commands(
             commands=[
                 types.BotCommand('/start', 'Запуск бота'),
-                types.BotCommand('/startquest', 'Начать квест'),
+                types.BotCommand('/quest', 'Начать квест'),
                 types.BotCommand('/information', 'Информация'),
                 types.BotCommand('/help', 'Помощь')
             ],
@@ -198,7 +199,7 @@ def get_message(message):
 Тематик - бот помощник. Он поможет вам определиться с выбором во многих темах, в которых вы возможно не разбираетесь. 
 Этот бот представлять возможность вам в выборе ответа на предложенные темы. 
 Мы стараемся уточнить ваш выбор задавая вопросы с предложенными на них ответы по выбранной теме.
-Так же вы можете  узнать много интересных фактов о данной теме. 
+Так же вы можете узнать много интересных фактов о данной теме. 
 *Наш бот не несет ответственности за ваш выбор и не несёт ни какого сексуального характера (18+)*.
             
 *Желаем тебе удачи!*
@@ -211,12 +212,12 @@ def get_message(message):
 4. Разобраться в своих предпочтениях.
 5. Повеселиться!
             
-Чтобы начать пользоваться ботов просто напишите команду из списка ниже.
+Что-бы начать пользоваться ботом просто напишите команду из списка ниже.
             
 *Список команд:*
             
 /start - запуск бота
-/startquest - начать квест
+/quest - начать квест
 /information - краткая информации о вещах
 /help - Помощь
             
@@ -230,7 +231,7 @@ def get_message(message):
 *Удачи!*''', parse_mode='Markdown')
         print(message.from_user.id, message.text)
 
-    elif message.text == '/startquest':
+    elif message.text == '/quest':
 
         keyboard = types.InlineKeyboardMarkup()
 
@@ -268,7 +269,7 @@ def get_message(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_worker(call):
-    global page, active_theme, active_informations, limit
+    global page, active_theme, active_informations, limit, active_question, active_otvets
 
     if call.data.startswith('theme'):
         active_theme = call.data.split('_')[1]
@@ -280,7 +281,17 @@ def callback_worker(call):
             button_questions = types.InlineKeyboardButton(text=questions, callback_data='question_'+questions)
             keyboard.add(button_questions)
 
-        bot.send_message(call.from_user.id, '*Выберите вопрос:*', parse_mode='Markdown', reply_markup=keyboard)
+        if call.data.startswith('theme'):
+            active_theme = call.data.split('_')[1]
+            keyboard = types.InlineKeyboardMarkup()
+
+            file_themes = open('themes_example.json', 'r+', encoding='utf-8')
+            full_theme = json.load(file_themes)
+            for questions in list(full_theme['Теннис']['question'].keys()):
+                button_questions = types.InlineKeyboardButton(text=questions, callback_data='question_' + questions)
+                keyboard.add(button_questions)
+
+            bot.send_message(call.from_user.id, '*Выберите вопрос:*', parse_mode='Markdown', reply_markup=keyboard)
 
 
     if call.data.startswith('question'):
@@ -295,145 +306,159 @@ def callback_worker(call):
 
         bot.send_message(call.from_user.id, '*Выберите  ответ:*', parse_mode='Markdown', reply_markup=keyboard)
 
+    if call.data.startswith('otvets'):
+        active_otvets = call.data.split('_')[1]
+
+        file_themes = open('themes_example.json', 'r+', encoding='utf-8')
+        full_theme = json.load(file_themes)
+        if 'question' in full_theme[active_theme]['question'][active_question]['otvets'][active_otvets]:
+            active_question = full_theme[active_theme]['question'][active_question]['otvets'][active_otvets]['question']
+            otvets = full_theme[active_theme]['question'][active_question]['otvets'].keys()
+            keyboard = types.InlineKeyboardMarkup()
+
+            for otvet in otvets:
+                button_otvet = types.InlineKeyboardButton(text=otvet, callback_data='otvets_' + otvet)
+                keyboard.add(button_otvet)
+            bot.send_message(call.from_user.id, active_question, parse_mode='Markdown', reply_markup=keyboard)
+
     if call.data.startswith('informations'):
         active_informations = call.data.split('_')[1]
-        keyboard = types.InlineKeyboardMarkup()
 
-    if active_informations == 'Спорт':
-        for button in buttons_sport:
-            if call.data == button.callback_data:
-                file = open('info_sport.json', 'r', encoding='utf-8')
-                info_sport = json.load(file)
-                for sport in info_sport:
-                    if sport['Наименование'] == call.data:
-                        url_sport = sport['Ссылка на информацию']
-                        response = requests.get(url_sport)
-                        soup = BeautifulSoup(response.text, 'lxml')
-                        mini_info_sport = soup.select('div.mw-content-ltr.mw-parser-output > p')
-                        name_sport = soup.find('span', class_='mw-page-title-main')
-                        bot.send_message(call.from_user.id, text=('Название спорта: ' + name_sport.text))
-                        bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_sport[0].text))
-                        bot.send_message(call.from_user.id, text=sport['Ссылка на информацию'])
-        if call.data == 'Перейти на следующую страницу':
-            keyboard = types.InlineKeyboardMarkup()
-            page += 1
-            for i in range(page * limit - limit, min(len(buttons_sport), page * limit)):
-                keyboard.add(buttons_sport[i])
-            if page != 1:
-                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
-            if page * limit < len(buttons_sport):
+        if active_informations == 'Спорт':
+            for button in buttons_sport:
+                if call.data == button.callback_data:
+                    file = open('info_sport.json', 'r', encoding='utf-8')
+                    info_sport = json.load(file)
+                    for sport in info_sport:
+                        if sport['Наименование'] == call.data:
+                            url_sport = sport['Ссылка на информацию']
+                            response = requests.get(url_sport)
+                            soup = BeautifulSoup(response.text, 'lxml')
+                            mini_info_sport = soup.select('div.mw-content-ltr.mw-parser-output > p')
+                            name_sport = soup.find('span', class_='mw-page-title-main')
+                            bot.send_message(call.from_user.id, text=('Название спорта: ' + name_sport.text))
+                            bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_sport[0].text))
+                            bot.send_message(call.from_user.id, text=sport['Ссылка на информацию'])
+            if call.data == 'Перейти на следующую страницу':
+                keyboard = types.InlineKeyboardMarkup()
+                page += 1
+                for i in range(page * limit - limit, min(len(buttons_sport), page * limit)):
+                    keyboard.add(buttons_sport[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+                if page * limit < len(buttons_sport):
+                    keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
+                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
+            elif call.data == 'Вернуться к предыдущей странице':
+                keyboard = types.InlineKeyboardMarkup()
+                page -= 1
+                for i in range(page * limit - limit, min(len(buttons_sport), page * limit)):
+                    keyboard.add(buttons_sport[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
                 keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
-            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
-        elif call.data == 'Вернуться к предыдущей странице':
-            keyboard = types.InlineKeyboardMarkup()
-            page -= 1
-            for i in range(page * limit - limit, min(len(buttons_sport), page * limit)):
-                keyboard.add(buttons_sport[i])
-            if page != 1:
-                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
-            keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
-            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
-        else:
-            keyboard = types.InlineKeyboardMarkup()
-            for i in range(page * limit - limit, min(len(buttons_sport), page * limit)):
-                keyboard.add(buttons_sport[i])
-            if page != 1:
-                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
-            if page * limit < len(buttons_sport):
-                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
-            bot.send_message(call.from_user.id, '*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
-
-
-    if active_informations == 'Видео игры':
-        for button in buttons_game:
-            if call.data == button.callback_data:
-                file = open('info_game.json', 'r', encoding='utf-8')
-                info_game = json.load(file)
-                for game in info_game:
-                    if game['Наименование'] == call.data:
-                        url_game = game['Ссылка на информацию']
-                        response = requests.get(url_game)
-                        soup = BeautifulSoup(response.text, 'lxml')
-                        # div = soup.find('div', class_='mw-content-ltr mw-parser-output')
-                        mini_info_game = soup.select('div.mw-content-ltr.mw-parser-output > p')
-                        name_game = soup.find('h1', class_='firstHeading mw-first-heading')
-                        bot.send_message(call.from_user.id, text=('Название игры: ' + name_game.text))
-                        bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_game[0].text))
-                        bot.send_message(call.from_user.id, text=game['Ссылка на информацию'])
-        if call.data == 'Перейти на следующую страницу':
-            keyboard = types.InlineKeyboardMarkup()
-            page += 1
-            for i in range(page * limit - limit, min(len(buttons_game), page * limit)):
-                keyboard.add(buttons_game[i])
-            if page != 1:
-                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
-            if page * limit < len(buttons_game):
-                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
-            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
-        elif call.data == 'Вернуться к предыдущей странице':
-            keyboard = types.InlineKeyboardMarkup()
-            page -= 1
-            for i in range(page * limit - limit, min(len(buttons_game), page * limit)):
-                keyboard.add(buttons_game[i])
-            if page != 1:
-                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
-            keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу',callback_data='Перейти на следующую страницу'))
-            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
-        else:
-            keyboard = types.InlineKeyboardMarkup()
-            for i in range(page * limit - limit, min(len(buttons_game), page * limit)):
-                keyboard.add(buttons_game[i])
-            if page != 1:
-                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
-            if page * limit < len(buttons_game):
-                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
-            bot.send_message(call.from_user.id, '*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
+                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
+            else:
+                keyboard = types.InlineKeyboardMarkup()
+                for i in range(page * limit - limit, min(len(buttons_sport), page * limit)):
+                    keyboard.add(buttons_sport[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+                if page * limit < len(buttons_sport):
+                    keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
+                bot.send_message(call.from_user.id, '*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
 
 
-    if active_informations == 'Транспорт':
-        for button in buttons_auto:
-            if call.data == button.callback_data:
-                file = open('info_transport.json', 'r', encoding='utf-8')
-                info_transport = json.load(file)
-                for auto in info_transport:
-                    if auto['Наименование'] == call.data:
-                        url_auto = auto['Ссылка на информацию']
-                        response = requests.get(url_auto)
-                        soup = BeautifulSoup(response.text, 'lxml')
-                        # div = soup.find('div', class_='mw-content-ltr mw-parser-output')
-                        mini_info_auto = soup.select('div.mw-content-ltr.mw-parser-output > p')
-                        name_auto = soup.find('h1', class_='firstHeading mw-first-heading')
-                        bot.send_message(call.from_user.id, text=('Название игры: ' + name_auto.text))
-                        bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_auto[0].text))
-                        bot.send_message(call.from_user.id, text=auto['Ссылка на информацию'])
-        if call.data == 'Перейти на следующую страницу':
-            keyboard = types.InlineKeyboardMarkup()
-            page += 1
-            for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
-                keyboard.add(buttons_auto[i])
-            if page != 1:
-                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
-            if page * limit < len(buttons_auto):
+        if active_informations == 'Видео игры':
+            for button in buttons_game:
+                if call.data == button.callback_data:
+                    file = open('info_game.json', 'r', encoding='utf-8')
+                    info_game = json.load(file)
+                    for game in info_game:
+                        if game['Наименование'] == call.data:
+                            url_game = game['Ссылка на информацию']
+                            response = requests.get(url_game)
+                            soup = BeautifulSoup(response.text, 'lxml')
+                            # div = soup.find('div', class_='mw-content-ltr mw-parser-output')
+                            mini_info_game = soup.select('div.mw-content-ltr.mw-parser-output > p')
+                            name_game = soup.find('h1', class_='firstHeading mw-first-heading')
+                            bot.send_message(call.from_user.id, text=('Название игры: ' + name_game.text))
+                            bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_game[0].text))
+                            bot.send_message(call.from_user.id, text=game['Ссылка на информацию'])
+            if call.data == 'Перейти на следующую страницу':
+                keyboard = types.InlineKeyboardMarkup()
+                page += 1
+                for i in range(page * limit - limit, min(len(buttons_game), page * limit)):
+                    keyboard.add(buttons_game[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+                if page * limit < len(buttons_game):
+                    keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
+                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
+            elif call.data == 'Вернуться к предыдущей странице':
+                keyboard = types.InlineKeyboardMarkup()
+                page -= 1
+                for i in range(page * limit - limit, min(len(buttons_game), page * limit)):
+                    keyboard.add(buttons_game[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу',callback_data='Перейти на следующую страницу'))
+                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
+            else:
+                keyboard = types.InlineKeyboardMarkup()
+                for i in range(page * limit - limit, min(len(buttons_game), page * limit)):
+                    keyboard.add(buttons_game[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+                if page * limit < len(buttons_game):
+                    keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
+                bot.send_message(call.from_user.id, '*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
+
+
+        if active_informations == 'Транспорт':
+            for button in buttons_auto:
+                if call.data == button.callback_data:
+                    file = open('info_transport.json', 'r', encoding='utf-8')
+                    info_transport = json.load(file)
+                    for auto in info_transport:
+                        if auto['Наименование'] == call.data:
+                            url_auto = auto['Ссылка на информацию']
+                            response = requests.get(url_auto)
+                            soup = BeautifulSoup(response.text, 'lxml')
+                            # div = soup.find('div', class_='mw-content-ltr mw-parser-output')
+                            mini_info_auto = soup.select('div.mw-content-ltr.mw-parser-output > p')
+                            name_auto = soup.find('h1', class_='firstHeading mw-first-heading')
+                            bot.send_message(call.from_user.id, text=('Название игры: ' + name_auto.text))
+                            bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_auto[0].text))
+                            bot.send_message(call.from_user.id, text=auto['Ссылка на информацию'])
+            if call.data == 'Перейти на следующую страницу':
+                keyboard = types.InlineKeyboardMarkup()
+                page += 1
+                for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
+                    keyboard.add(buttons_auto[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+                if page * limit < len(buttons_auto):
+                    keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
+                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 модель машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
+            elif call.data == 'Вернуться к предыдущей странице':
+                keyboard = types.InlineKeyboardMarkup()
+                page -= 1
+                for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
+                    keyboard.add(buttons_auto[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
                 keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
-            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 модель машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
-        elif call.data == 'Вернуться к предыдущей странице':
-            keyboard = types.InlineKeyboardMarkup()
-            page -= 1
-            for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
-                keyboard.add(buttons_auto[i])
-            if page != 1:
-                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
-            keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
-            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
-        else:
-            keyboard = types.InlineKeyboardMarkup()
-            for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
-                keyboard.add(buttons_auto[i])
-            if page != 1:
-                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
-            if page * limit < len(buttons_auto):
-                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
-            bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*',  parse_mode='Markdown', reply_markup=keyboard)
+                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
+            else:
+                keyboard = types.InlineKeyboardMarkup()
+                for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
+                    keyboard.add(buttons_auto[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+                if page * limit < len(buttons_auto):
+                    keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
+                bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*',  parse_mode='Markdown', reply_markup=keyboard)
 
 bot.polling(none_stop = True, interval = 0)
 
