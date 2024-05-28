@@ -14,59 +14,59 @@ limit = 10
 active_theme = None
 active_question = None
 active_otvets = None
-active_informations = None
+active_info = None
 
 buttons_sport = [
-            types.InlineKeyboardButton(text='Биатлон', callback_data='Биатлон'),
-            types.InlineKeyboardButton(text='Бобслей', callback_data='Бобслей'),
-            types.InlineKeyboardButton(text='Горнолыжный спорт', callback_data='Горнолыжный спорт'),
-            types.InlineKeyboardButton(text='Кёрлинг', callback_data='Кёрлинг'),
-            types.InlineKeyboardButton(text='Лыжное двоеборье', callback_data='Лыжное двоеборье'),
-            types.InlineKeyboardButton(text='Лыжные гонки', callback_data='Лыжные гонки'),
-            types.InlineKeyboardButton(text='Прыжки на лыжах', callback_data='Прыжки на лыжах'),
-            types.InlineKeyboardButton(text='Санный спорт', callback_data='Санный спорт'),
-            types.InlineKeyboardButton(text='Скелетон', callback_data='Скелетон'),
-            types.InlineKeyboardButton(text='Сноуборд', callback_data='Сноуборд'),
-            types.InlineKeyboardButton(text='Фигурное катание', callback_data='Фигурное катание'),
-            types.InlineKeyboardButton(text='Фристайл', callback_data='Фристайл'),
-            types.InlineKeyboardButton(text='Хоккей', callback_data='Хоккей'),
-            types.InlineKeyboardButton(text='Шорт - трек', callback_data='Шорт - трек'),
-            types.InlineKeyboardButton(text='Баскетбол', callback_data='Баскетбол'),
-            types.InlineKeyboardButton(text='Бейсбол', callback_data='Бейсбол'),
-            types.InlineKeyboardButton(text='Бокс', callback_data='Бокс'),
-            types.InlineKeyboardButton(text='Вело спорт', callback_data='Вело спорт'),
-            types.InlineKeyboardButton(text='Водное поло', callback_data='Водное поло'),
-            types.InlineKeyboardButton(text='Волейбол', callback_data='Волейбол'),
-            types.InlineKeyboardButton(text='Гандбол', callback_data='Гандбол'),
-            types.InlineKeyboardButton(text='Гольф', callback_data='Гольф'),
-            types.InlineKeyboardButton(text='Гребля на байдарках', callback_data='Гребля на байдарках'),
-            types.InlineKeyboardButton(text='Гребный слалом', callback_data='Гребный слалом'),
-            types.InlineKeyboardButton(text='Гребной спорт', callback_data='Гребной спорт'),
-            types.InlineKeyboardButton(text='Дзюдо', callback_data='Дзюдо'),
-            types.InlineKeyboardButton(text='Бадминтон', callback_data='Бадминтон'),
-            types.InlineKeyboardButton(text='Каратэ', callback_data='Каратэ'),
-            types.InlineKeyboardButton(text='Конный спорт', callback_data='Конный спорт'),
-            types.InlineKeyboardButton(text='Лёгкая атлетика', callback_data='Лёгкая атлетика'),
-            types.InlineKeyboardButton(text='Настольный теннис', callback_data='Настольный теннис'),
-            types.InlineKeyboardButton(text='Парусный спорт', callback_data='Парусный спорт'),
-            types.InlineKeyboardButton(text='Плавание', callback_data='Плавание'),
-            types.InlineKeyboardButton(text='Пляжный волейбол', callback_data='Пляжный волейбол'),
-            types.InlineKeyboardButton(text='Прыжки в воду', callback_data='Прыжки в воду'),
-            types.InlineKeyboardButton(text='Прыжки на батуте', callback_data='Прыжки на батуте'),
-            types.InlineKeyboardButton(text='Регби', callback_data='Регби'),
-            types.InlineKeyboardButton(text='Сёрфинг', callback_data='Сёрфинг'),
-            types.InlineKeyboardButton(text='Скалолазание', callback_data='Скалолазание'),
-            types.InlineKeyboardButton(text='Скейтбординг', callback_data='Скейтбординг'),
-            types.InlineKeyboardButton(text='Современное пятиборье', callback_data='Современное пятиборье'),
-            types.InlineKeyboardButton(text='Софтбол', callback_data='Софтбол'),
-            types.InlineKeyboardButton(text='Стрельба', callback_data='Стрельба'),
-            types.InlineKeyboardButton(text='Стрельба из лука', callback_data='Стрельба из лука'),
-            types.InlineKeyboardButton(text='Теннис', callback_data='Теннис'),
-            types.InlineKeyboardButton(text='Триатлон', callback_data='Триатлон'),
-            types.InlineKeyboardButton(text='Тхэквондо', callback_data='Тхэквондо'),
-            types.InlineKeyboardButton(text='Тяжёлая атлетика', callback_data='Тяжёлая атлетика'),
-            types.InlineKeyboardButton(text='Фехтование', callback_data='Фехтование'),
-            types.InlineKeyboardButton(text='Футбол', callback_data='Футбол')
+            types.InlineKeyboardButton(text='Биатлон', callback_data='info_Биатлон'),
+            types.InlineKeyboardButton(text='Бобслей', callback_data='info_Бобслей'),
+            types.InlineKeyboardButton(text='Горнолыжный спорт', callback_data='info_Горнолыжный спорт'),
+            types.InlineKeyboardButton(text='Кёрлинг', callback_data='info_Кёрлинг'),
+            types.InlineKeyboardButton(text='Лыжное двоеборье', callback_data='info_Лыжное двоеборье'),
+            types.InlineKeyboardButton(text='Лыжные гонки', callback_data='info_Лыжные гонки'),
+            types.InlineKeyboardButton(text='Прыжки на лыжах', callback_data='info_Прыжки на лыжах'),
+            types.InlineKeyboardButton(text='Санный спорт', callback_data='info_Санный спорт'),
+            types.InlineKeyboardButton(text='Скелетон', callback_data='info_Скелетон'),
+            types.InlineKeyboardButton(text='Сноуборд', callback_data='info_Сноуборд'),
+            types.InlineKeyboardButton(text='Фигурное катание', callback_data='info_Фигурное катание'),
+            types.InlineKeyboardButton(text='Фристайл', callback_data='info_Фристайл'),
+            types.InlineKeyboardButton(text='Хоккей', callback_data='info_Хоккей'),
+            types.InlineKeyboardButton(text='Шорт - трек', callback_data='info_Шорт - трек'),
+            types.InlineKeyboardButton(text='Баскетбол', callback_data='info_Баскетбол'),
+            types.InlineKeyboardButton(text='Бейсбол', callback_data='info_Бейсбол'),
+            types.InlineKeyboardButton(text='Бокс', callback_data='info_Бокс'),
+            types.InlineKeyboardButton(text='Вело спорт', callback_data='info_Вело спорт'),
+            types.InlineKeyboardButton(text='Водное поло', callback_data='info_Водное поло'),
+            types.InlineKeyboardButton(text='Волейбол', callback_data='info_Волейбол'),
+            types.InlineKeyboardButton(text='Гандбол', callback_data='info_Гандбол'),
+            types.InlineKeyboardButton(text='Гольф', callback_data='info_Гольф'),
+            types.InlineKeyboardButton(text='Гребля на байдарках', callback_data='info_Гребля на байдарках'),
+            types.InlineKeyboardButton(text='Гребный слалом', callback_data='info_Гребный слалом'),
+            types.InlineKeyboardButton(text='Гребной спорт', callback_data='info_Гребной спорт'),
+            types.InlineKeyboardButton(text='Дзюдо', callback_data='info_Дзюдо'),
+            types.InlineKeyboardButton(text='Бадминтон', callback_data='info_Бадминтон'),
+            types.InlineKeyboardButton(text='Каратэ', callback_data='info_Каратэ'),
+            types.InlineKeyboardButton(text='Конный спорт', callback_data='info_Конный спорт'),
+            types.InlineKeyboardButton(text='Лёгкая атлетика', callback_data='info_Лёгкая атлетика'),
+            types.InlineKeyboardButton(text='Настольный теннис', callback_data='info_Настольный теннис'),
+            types.InlineKeyboardButton(text='Парусный спорт', callback_data='info_Парусный спорт'),
+            types.InlineKeyboardButton(text='Плавание', callback_data='info_Плавание'),
+            types.InlineKeyboardButton(text='Пляжный волейбол', callback_data='info_Пляжный волейбол'),
+            types.InlineKeyboardButton(text='Прыжки в воду', callback_data='info_Прыжки в воду'),
+            types.InlineKeyboardButton(text='Прыжки на батуте', callback_data='info_Прыжки на батуте'),
+            types.InlineKeyboardButton(text='Регби', callback_data='info_Регби'),
+            types.InlineKeyboardButton(text='Сёрфинг', callback_data='info_Сёрфинг'),
+            types.InlineKeyboardButton(text='Скалолазание', callback_data='info_Скалолазание'),
+            types.InlineKeyboardButton(text='Скейтбординг', callback_data='info_Скейтбординг'),
+            types.InlineKeyboardButton(text='Современное пятиборье', callback_data='info_Современное пятиборье'),
+            types.InlineKeyboardButton(text='Софтбол', callback_data='info_Софтбол'),
+            types.InlineKeyboardButton(text='Стрельба', callback_data='info_Стрельба'),
+            types.InlineKeyboardButton(text='Стрельба из лука', callback_data='info_Стрельба из лука'),
+            types.InlineKeyboardButton(text='Теннис', callback_data='info_Теннис'),
+            types.InlineKeyboardButton(text='Триатлон', callback_data='info_Триатлон'),
+            types.InlineKeyboardButton(text='Тхэквондо', callback_data='info_Тхэквондо'),
+            types.InlineKeyboardButton(text='Тяжёлая атлетика', callback_data='info_Тяжёлая атлетика'),
+            types.InlineKeyboardButton(text='Фехтование', callback_data='info_Фехтование'),
+            types.InlineKeyboardButton(text='Футбол', callback_data='info_Футбол')
         ]
 
 buttons_game = [
@@ -187,7 +187,7 @@ def get_message(message):
             commands=[
                 types.BotCommand('/start', 'Запуск бота'),
                 types.BotCommand('/quest', 'Начать квест'),
-                types.BotCommand('/information', 'Информация'),
+                types.BotCommand('/info', 'Информация'),
                 types.BotCommand('/help', 'Помощь')
             ],
             scope=types.BotCommandScopeChat(message.chat.id)
@@ -218,7 +218,7 @@ def get_message(message):
             
 /start - запуск бота
 /quest - начать квест
-/information - краткая информации о вещах
+/info - краткая информации о вещах
 /help - Помощь
             
 *Разработчики:*
@@ -244,14 +244,14 @@ def get_message(message):
         bot.send_message(message.from_user.id, '*Выберите тему:*', parse_mode='Markdown', reply_markup=keyboard)
         print(message.from_user.id, message.text)
 
-    elif message.text == '/information':
+    elif message.text == '/info':
 
         keyboard = types.InlineKeyboardMarkup()
 
         themes_buttons = [
-            types.InlineKeyboardButton(text='Спорт', callback_data='informations_Спорт'),
-            types.InlineKeyboardButton(text='Видео игры', callback_data='informations_Видео игры'),
-            types.InlineKeyboardButton(text='Транспорт', callback_data='informations_Транспорт')
+            types.InlineKeyboardButton(text='Спорт', callback_data='info_Спорт'),
+            types.InlineKeyboardButton(text='Видео игры', callback_data='info_Видео игры'),
+            types.InlineKeyboardButton(text='Транспорт', callback_data='info_Транспорт')
         ]
         for i in range(len(themes_buttons)):
             keyboard.add(themes_buttons[i])
@@ -269,7 +269,9 @@ def get_message(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_worker(call):
-    global page, active_theme, active_informations, limit, active_question, active_otvets
+    global page, active_theme, active_info, limit, active_question, active_otvets
+
+    # Начало работы команды /quest
 
     if call.data.startswith('theme'):
         active_theme = call.data.split('_')[1]
@@ -292,7 +294,6 @@ def callback_worker(call):
                 keyboard.add(button_questions)
 
             bot.send_message(call.from_user.id, '*Выберите вопрос:*', parse_mode='Markdown', reply_markup=keyboard)
-
 
     if call.data.startswith('question'):
         active_question = call.data.split('_')[1]
@@ -321,24 +322,13 @@ def callback_worker(call):
                 keyboard.add(button_otvet)
             bot.send_message(call.from_user.id, active_question, parse_mode='Markdown', reply_markup=keyboard)
 
-    if call.data.startswith('informations'):
-        active_informations = call.data.split('_')[1]
+    # Начало работы команды /info
 
-        if active_informations == 'Спорт':
-            for button in buttons_sport:
-                if call.data == button.callback_data:
-                    file = open('info_sport.json', 'r', encoding='utf-8')
-                    info_sport = json.load(file)
-                    for sport in info_sport:
-                        if sport['Наименование'] == call.data:
-                            url_sport = sport['Ссылка на информацию']
-                            response = requests.get(url_sport)
-                            soup = BeautifulSoup(response.text, 'lxml')
-                            mini_info_sport = soup.select('div.mw-content-ltr.mw-parser-output > p')
-                            name_sport = soup.find('span', class_='mw-page-title-main')
-                            bot.send_message(call.from_user.id, text=('Название спорта: ' + name_sport.text))
-                            bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_sport[0].text))
-                            bot.send_message(call.from_user.id, text=sport['Ссылка на информацию'])
+    if call.data.startswith('info'):
+        active_info = call.data.split('_')[1]
+        keyboard = types.InlineKeyboardMarkup()
+
+        if active_info == 'Спорт':
             if call.data == 'Перейти на следующую страницу':
                 keyboard = types.InlineKeyboardMarkup()
                 page += 1
@@ -369,10 +359,10 @@ def callback_worker(call):
                 bot.send_message(call.from_user.id, '*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
 
 
-        if active_informations == 'Видео игры':
+        if active_info == 'Видео игры':
             for button in buttons_game:
                 if call.data == button.callback_data:
-                    file = open('info_game.json', 'r', encoding='utf-8')
+                    file = open('info_game.json', 'r+', encoding='utf-8')
                     info_game = json.load(file)
                     for game in info_game:
                         if game['Наименование'] == call.data:
@@ -415,10 +405,10 @@ def callback_worker(call):
                 bot.send_message(call.from_user.id, '*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
 
 
-        if active_informations == 'Транспорт':
+        elif active_info == 'Транспорт':
             for button in buttons_auto:
                 if call.data == button.callback_data:
-                    file = open('info_transport.json', 'r', encoding='utf-8')
+                    file = open('info_transport.json', 'r+', encoding='utf-8')
                     info_transport = json.load(file)
                     for auto in info_transport:
                         if auto['Наименование'] == call.data:
@@ -459,6 +449,51 @@ def callback_worker(call):
                 if page * limit < len(buttons_auto):
                     keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
                 bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*',  parse_mode='Markdown', reply_markup=keyboard)
+
+        else:
+            for button in buttons_sport:
+                if call.data == button.callback_data:
+                    file = open('info_sport.json', 'r+', encoding='utf-8')
+                    info_sport = json.load(file)
+                    sportname = call.data.split('_')[1]
+                    for sport in info_sport:
+                        if sport['Наименование'] == sportname:
+                            url_sport = sport['Ссылка на информацию']
+                            response = requests.get(url_sport)
+                            soup = BeautifulSoup(response.text, 'lxml')
+                            mini_info_sport = soup.select('div.mw-content-ltr.mw-parser-output > p')
+                            name_sport = soup.find('span', class_='mw-page-title-main')
+                            bot.send_message(call.from_user.id, text=('Название спорта: ' + name_sport.text))
+                            bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_sport[0].text))
+                            bot.send_message(call.from_user.id, text=sport['Ссылка на информацию'])
+            if call.data == 'Перейти на следующую страницу':
+                keyboard = types.InlineKeyboardMarkup()
+                page += 1
+                for i in range(page * limit - limit, min(len(buttons_sport), page * limit)):
+                    keyboard.add(buttons_sport[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+                if page * limit < len(buttons_sport):
+                    keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
+                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
+            elif call.data == 'Вернуться к предыдущей странице':
+                keyboard = types.InlineKeyboardMarkup()
+                page -= 1
+                for i in range(page * limit - limit, min(len(buttons_sport), page * limit)):
+                    keyboard.add(buttons_sport[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
+                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
+            else:
+                keyboard = types.InlineKeyboardMarkup()
+                for i in range(page * limit - limit, min(len(buttons_sport), page * limit)):
+                    keyboard.add(buttons_sport[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
+                if page * limit < len(buttons_sport):
+                    keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
+                bot.send_message(call.from_user.id, '*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
 
 bot.polling(none_stop = True, interval = 0)
 
