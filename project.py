@@ -125,56 +125,56 @@ buttons_game = [
 
 
 buttons_auto = [
-            types.InlineKeyboardButton(text='Audi A4', callback_data='Audi A4'),
-            types.InlineKeyboardButton(text='Audi S5', callback_data='Audi S5'),
-            types.InlineKeyboardButton(text='Audi RS6', callback_data='Audi RS6'),
-            types.InlineKeyboardButton(text='Audi A7 Sportback', callback_data='Audi A7 Sportback'),
-            types.InlineKeyboardButton(text='Audi E-Tron', callback_data='Audi E-Tron'),
-            types.InlineKeyboardButton(text='BMW M8', callback_data='BMW M8'),
-            types.InlineKeyboardButton(text='BMW 4', callback_data='BMW 4'),
-            types.InlineKeyboardButton(text='BMW X5', callback_data='BMW X5'),
-            types.InlineKeyboardButton(text='BMW X7', callback_data='BMW X7'),
-            types.InlineKeyboardButton(text='BMW i7', callback_data='BMW i7'),
-            types.InlineKeyboardButton(text='Mercedec-Benz AMG GT', callback_data='Mercedec-Benz AMG GT'),
-            types.InlineKeyboardButton(text='Mercedec-Benz CLS', callback_data='Mercedec-Benz CLS'),
-            types.InlineKeyboardButton(text='Mercedec-Benz A', callback_data='Mercedec-Benz A'),
-            types.InlineKeyboardButton(text='Mercedec-Benz G AMG', callback_data='Mercedec-Benz G AMG'),
-            types.InlineKeyboardButton(text='Mercedec-Benz GLA', callback_data='Mercedec-Benz GLA'),
-            types.InlineKeyboardButton(text='Ford Mustag', callback_data='Ford Mustag'),
-            types.InlineKeyboardButton(text='Ford Fiesta', callback_data='Ford Fiesta'),
-            types.InlineKeyboardButton(text='Ford Puma', callback_data='Ford Puma'),
-            types.InlineKeyboardButton(text='Ford Ranger Raptor', callback_data='Ford Ranger Raptor'),
-            types.InlineKeyboardButton(text='Ford Mustang Mach-E', callback_data='Ford Mustang Mach-E'),
-            types.InlineKeyboardButton(text='Nissan Z', callback_data='Nissan Z'),
-            types.InlineKeyboardButton(text='Nissan GT-R', callback_data='Nissan GT-R'),
-            types.InlineKeyboardButton(text='Nissan Juke', callback_data='Nissan Juke'),
-            types.InlineKeyboardButton(text='Nissan Navara', callback_data='Nissan Navara'),
-            types.InlineKeyboardButton(text='Nissan Murano', callback_data='Nissan Murano'),
-            types.InlineKeyboardButton(text='Tesla Model 3', callback_data='Tesla Model 3'),
-            types.InlineKeyboardButton(text='Tesla Model S', callback_data='Tesla Model S'),
-            types.InlineKeyboardButton(text='Tesla Model X', callback_data='Tesla Model X'),
-            types.InlineKeyboardButton(text='Tesla Cybertruck', callback_data='Tesla Cybertruck'),
-            types.InlineKeyboardButton(text='Lamborghini Urus', callback_data='Lamborghini Urus'),
-            types.InlineKeyboardButton(text='Lamborghini Huracan', callback_data='Lamborghini Huracan'),
-            types.InlineKeyboardButton(text='Lamborghini Aventador', callback_data='Lamborghini Aventador'),
-            types.InlineKeyboardButton(text='Lamborghini Centenario', callback_data='Lamborghini Centenario'),
-            types.InlineKeyboardButton(text='Lamborghini Sian', callback_data='Lamborghini Sian'),
-            types.InlineKeyboardButton(text='Ferrari Purosangue', callback_data='Ferrari Purosangue'),
-            types.InlineKeyboardButton(text='Ferrari 812 Superfast', callback_data='Ferrari 812 Superfast'),
-            types.InlineKeyboardButton(text='Ferrari Roma', callback_data='Ferrari Roma'),
-            types.InlineKeyboardButton(text='Ferrari SF90 Stradale', callback_data='Ferrari SF90 Stradale'),
-            types.InlineKeyboardButton(text='Ferrari Enzo', callback_data='Ferrari Enzo'),
-            types.InlineKeyboardButton(text='LADA Niva Travel', callback_data='LADA Niva Travel'),
-            types.InlineKeyboardButton(text='LADA Vesta', callback_data='LADA Vesta'),
-            types.InlineKeyboardButton(text='LADA Granta', callback_data='LADA Granta'),
-            types.InlineKeyboardButton(text='LADA Largus', callback_data='LADA Largus'),
-            types.InlineKeyboardButton(text='LADA Niva', callback_data='LADA Niva'),
-            types.InlineKeyboardButton(text='Opel Crossland', callback_data='Opel Crossland'),
-            types.InlineKeyboardButton(text='Opel Corsa', callback_data='Opel Corsa'),
-            types.InlineKeyboardButton(text='Opel Astra', callback_data='Opel Astra'),
-            types.InlineKeyboardButton(text='Opel Insignia', callback_data='Opel Insignia'),
-            types.InlineKeyboardButton(text='Opel Mokka', callback_data='Opel Mokka'),
-            types.InlineKeyboardButton(text='Bentley Continental GT', callback_data='Bentley Continental GT')
+            types.InlineKeyboardButton(text='Audi A4', callback_data='info_Audi A4'),
+            types.InlineKeyboardButton(text='Audi S5', callback_data='info_Audi S5'),
+            types.InlineKeyboardButton(text='Audi RS6', callback_data='info_Audi RS6'),
+            types.InlineKeyboardButton(text='Audi A7 Sportback', callback_data='info_Audi A7 Sportback'),
+            types.InlineKeyboardButton(text='Audi E-Tron', callback_data='info_Audi E-Tron'),
+            types.InlineKeyboardButton(text='BMW M8', callback_data='info_BMW M8'),
+            types.InlineKeyboardButton(text='BMW 4', callback_data='info_BMW 4'),
+            types.InlineKeyboardButton(text='BMW X5', callback_data='info_BMW X5'),
+            types.InlineKeyboardButton(text='BMW X7', callback_data='info_BMW X7'),
+            types.InlineKeyboardButton(text='BMW i7', callback_data='info_BMW i7'),
+            types.InlineKeyboardButton(text='Mercedec-Benz AMG GT', callback_data='info_Mercedec-Benz AMG GT'),
+            types.InlineKeyboardButton(text='Mercedec-Benz CLS', callback_data='info_Mercedec-Benz CLS'),
+            types.InlineKeyboardButton(text='Mercedec-Benz A', callback_data='info_Mercedec-Benz A'),
+            types.InlineKeyboardButton(text='Mercedec-Benz G AMG', callback_data='info_Mercedec-Benz G AMG'),
+            types.InlineKeyboardButton(text='Mercedec-Benz GLA', callback_data='info_Mercedec-Benz GLA'),
+            types.InlineKeyboardButton(text='Ford Mustag', callback_data='info_Ford Mustag'),
+            types.InlineKeyboardButton(text='Ford Fiesta', callback_data='info_Ford Fiesta'),
+            types.InlineKeyboardButton(text='Ford Puma', callback_data='info_Ford Puma'),
+            types.InlineKeyboardButton(text='Ford Ranger Raptor', callback_data='info_Ford Ranger Raptor'),
+            types.InlineKeyboardButton(text='Ford Mustang Mach-E', callback_data='info_Ford Mustang Mach-E'),
+            types.InlineKeyboardButton(text='Nissan Z', callback_data='info_Nissan Z'),
+            types.InlineKeyboardButton(text='Nissan GT-R', callback_data='info_Nissan GT-R'),
+            types.InlineKeyboardButton(text='Nissan Juke', callback_data='info_Nissan Juke'),
+            types.InlineKeyboardButton(text='Nissan Navara', callback_data='info_Nissan Navara'),
+            types.InlineKeyboardButton(text='Nissan Murano', callback_data='info_Nissan Murano'),
+            types.InlineKeyboardButton(text='Tesla Model 3', callback_data='info_Tesla Model 3'),
+            types.InlineKeyboardButton(text='Tesla Model S', callback_data='info_Tesla Model S'),
+            types.InlineKeyboardButton(text='Tesla Model X', callback_data='info_Tesla Model X'),
+            types.InlineKeyboardButton(text='Tesla Cybertruck', callback_data='info_Tesla Cybertruck'),
+            types.InlineKeyboardButton(text='Lamborghini Urus', callback_data='info_Lamborghini Urus'),
+            types.InlineKeyboardButton(text='Lamborghini Huracan', callback_data='info_Lamborghini Huracan'),
+            types.InlineKeyboardButton(text='Lamborghini Aventador', callback_data='info_Lamborghini Aventador'),
+            types.InlineKeyboardButton(text='Lamborghini Centenario', callback_data='info_Lamborghini Centenario'),
+            types.InlineKeyboardButton(text='Lamborghini Sian', callback_data='info_Lamborghini Sian'),
+            types.InlineKeyboardButton(text='Ferrari Purosangue', callback_data='info_Ferrari Purosangue'),
+            types.InlineKeyboardButton(text='Ferrari 812 Superfast', callback_data='info_Ferrari 812 Superfast'),
+            types.InlineKeyboardButton(text='Ferrari Roma', callback_data='info_Ferrari Roma'),
+            types.InlineKeyboardButton(text='Ferrari SF90 Stradale', callback_data='info_Ferrari SF90 Stradale'),
+            types.InlineKeyboardButton(text='Ferrari Enzo', callback_data='info_Ferrari Enzo'),
+            types.InlineKeyboardButton(text='LADA Niva Travel', callback_data='info_LADA Niva Travel'),
+            types.InlineKeyboardButton(text='LADA Vesta', callback_data='info_LADA Vesta'),
+            types.InlineKeyboardButton(text='LADA Granta', callback_data='info_LADA Granta'),
+            types.InlineKeyboardButton(text='LADA Largus', callback_data='info_LADA Largus'),
+            types.InlineKeyboardButton(text='LADA Niva', callback_data='info_LADA Niva'),
+            types.InlineKeyboardButton(text='Opel Crossland', callback_data='info_Opel Crossland'),
+            types.InlineKeyboardButton(text='Opel Corsa', callback_data='info_Opel Corsa'),
+            types.InlineKeyboardButton(text='Opel Astra', callback_data='info_Opel Astra'),
+            types.InlineKeyboardButton(text='Opel Insignia', callback_data='info_Opel Insignia'),
+            types.InlineKeyboardButton(text='Opel Mokka', callback_data='info_Opel Mokka'),
+            types.InlineKeyboardButton(text='Bentley Continental GT', callback_data='info_Bentley Continental GT')
 ]
 
 
@@ -357,8 +357,8 @@ def callback_worker(call):
             keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
         else:
-            for button in buttons_sport:
-                if call.data == button.callback_data:
+            for button_sport in buttons_sport:
+                if call.data == button_sport.callback_data:
                     file = open('info_sport.json', 'r+', encoding='utf-8')
                     info_sport = json.load(file)
                     for sport in info_sport:
@@ -380,7 +380,6 @@ def callback_worker(call):
                 keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
             bot.send_message(call.from_user.id, '*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
 
-
         if active_info == 'Видео игры':
             keyboard = types.InlineKeyboardMarkup()
             for i in range(page * limit - limit, min(len(buttons_game), page * limit)):
@@ -391,27 +390,27 @@ def callback_worker(call):
                 keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
             bot.send_message(call.from_user.id, '*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
         elif active_info == 'Перейти на следующую страницу':
-            keyboard = types.InlineKeyboardMarkup()
-            page += 1
-            for i in range(page * limit - limit, min(len(buttons_game), page * limit)):
-                keyboard.add(buttons_game[i])
-            if page != 1:
-                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='info_Вернуться к предыдущей странице'))
-            if page * limit < len(buttons_game):
-                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
-            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
+                keyboard = types.InlineKeyboardMarkup()
+                page += 1
+                for i in range(page * limit - limit, min(len(buttons_game), page * limit)):
+                    keyboard.add(buttons_game[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='info_Вернуться к предыдущей странице'))
+                if page * limit < len(buttons_game):
+                    keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
+                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
         elif active_info == 'Вернуться к предыдущей странице':
-            keyboard = types.InlineKeyboardMarkup()
-            page -= 1
-            for i in range(page * limit - limit, min(len(buttons_game), page * limit)):
-                keyboard.add(buttons_game[i])
-            if page != 1:
-                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='info_Вернуться к предыдущей странице'))
-            keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу',callback_data='info_Перейти на следующую страницу'))
-            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
+                keyboard = types.InlineKeyboardMarkup()
+                page -= 1
+                for i in range(page * limit - limit, min(len(buttons_game), page * limit)):
+                    keyboard.add(buttons_game[i])
+                if page != 1:
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='info_Вернуться к предыдущей странице'))
+                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу',callback_data='info_Перейти на следующую страницу'))
+                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
         else:
-            for button in buttons_game:
-                if call.data == button.callback_data:
+            for button_game in buttons_game:
+                if call.data == button_game.callback_data:
                     file = open('info_game.json', 'r+', encoding='utf-8')
                     info_game = json.load(file)
                     for game in info_game:
@@ -434,66 +433,57 @@ def callback_worker(call):
                 keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 видео игр! Выберите интерисующую вас игру:*', parse_mode='Markdown', reply_markup=keyboard)
 
-        # elif active_info == 'Транспорт':
-        #     for button in buttons_auto:
-        #         if call.data == button.callback_data:
-        #             file = open('info_transport.json', 'r+', encoding='utf-8')
-        #             info_transport = json.load(file)
-        #             for auto in info_transport:
-        #                 if auto['Наименование'] == call.data:
-        #                     url_auto = auto['Ссылка на информацию']
-        #                     response = requests.get(url_auto)
-        #                     soup = BeautifulSoup(response.text, 'lxml')
-        #                     # div = soup.find('div', class_='mw-content-ltr mw-parser-output')
-        #                     mini_info_auto = soup.select('div.mw-content-ltr.mw-parser-output > p')
-        #                     name_auto = soup.find('h1', class_='firstHeading mw-first-heading')
-        #                     bot.send_message(call.from_user.id, text=('Название игры: ' + name_auto.text))
-        #                     bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_auto[0].text))
-        #                     bot.send_message(call.from_user.id, text=auto['Ссылка на информацию'])
-        #     if call.data == 'Перейти на следующую страницу':
-        #         keyboard = types.InlineKeyboardMarkup()
-        #         page += 1
-        #         for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
-        #             keyboard.add(buttons_auto[i])
-        #         if page != 1:
-        #             keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
-        #         if page * limit < len(buttons_auto):
-        #             keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
-        #         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 модель машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
-        #     elif call.data == 'Вернуться к предыдущей странице':
-        #         keyboard = types.InlineKeyboardMarkup()
-        #         page -= 1
-        #         for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
-        #             keyboard.add(buttons_auto[i])
-        #         if page != 1:
-        #             keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
-        #         keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
-        #         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
-        #     else:
-        #         keyboard = types.InlineKeyboardMarkup()
-        #         for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
-        #             keyboard.add(buttons_auto[i])
-        #         if page != 1:
-        #             keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='Вернуться к предыдущей странице'))
-        #         if page * limit < len(buttons_auto):
-        #             keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='Перейти на следующую страницу'))
-        #         bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*',  parse_mode='Markdown', reply_markup=keyboard)
-
-        # else:
-        #     for button in buttons_sport:
-        #         if call.data == button.callback_data:
-        #             file = open('info_sport.json', 'r+', encoding='utf-8')
-        #             info_sport = json.load(file)
-        #             sportname = call.data.split('_')[1]
-        #             for sport in info_sport:
-        #                 if sport['Наименование'] == sportname:
-        #                     url_sport = sport['Ссылка на информацию']
-        #                     response = requests.get(url_sport)
-        #                     soup = BeautifulSoup(response.text, 'lxml')
-        #                     mini_info_sport = soup.select('div.mw-content-ltr.mw-parser-output > p')
-        #                     name_sport = soup.find('span', class_='mw-page-title-main')
-        #                     bot.send_message(call.from_user.id, text=('Название спорта: ' + name_sport.text))
-        #                     bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_sport[0].text))
-        #                     bot.send_message(call.from_user.id, text=sport['Ссылка на информацию'])
+        if active_info == 'Транспорт':
+            keyboard = types.InlineKeyboardMarkup()
+            for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
+                keyboard.add(buttons_auto[i])
+            if page != 1:
+                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='info_Вернуться к предыдущей странице'))
+            if page * limit < len(buttons_auto):
+                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
+            bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
+        elif active_info == 'Перейти на следующую страницу':
+            keyboard = types.InlineKeyboardMarkup()
+            page += 1
+            for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
+                keyboard.add(buttons_auto[i])
+            if page != 1:
+                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='info_Вернуться к предыдущей странице'))
+            if page * limit < len(buttons_auto):
+                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 модель машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
+        elif active_info == 'Вернуться к предыдущей странице':
+            keyboard = types.InlineKeyboardMarkup()
+            page -= 1
+            for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
+                keyboard.add(buttons_auto[i])
+            if page != 1:
+                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='info_Вернуться к предыдущей странице'))
+            keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
+        else:
+            for button_auto in buttons_auto:
+                if call.data == button_auto.callback_data:
+                    file = open('info_transport.json', 'r+', encoding='utf-8')
+                    info_transport = json.load(file)
+                    for auto in info_transport:
+                        if auto['Наименование'] == call.data:
+                            url_auto = auto['Ссылка на информацию']
+                            response = requests.get(url_auto)
+                            soup = BeautifulSoup(response.text, 'lxml')
+                            mini_info_auto = soup.select('div.mw-content-ltr.mw-parser-output > p')
+                            name_auto = soup.find('h1', class_='firstHeading mw-first-heading')
+                            bot.send_message(call.from_user.id, text=('Название игры: ' + name_auto.text))
+                            bot.send_message(call.from_user.id, text=('Мини информация: ' + mini_info_auto[0].text))
+                            bot.send_message(call.from_user.id, text=auto['Ссылка на информацию'])
+            keyboard = types.InlineKeyboardMarkup()
+            page += 1
+            for i in range(page * limit - limit, min(len(buttons_auto), page * limit)):
+                keyboard.add(buttons_auto[i])
+            if page != 1:
+                keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='info_Вернуться к предыдущей странице'))
+            if page * limit < len(buttons_auto):
+                keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='*50 модель машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
 
 bot.polling(none_stop = True, interval = 0)
