@@ -23,9 +23,6 @@ def load_themes():
     return themes
 
 
-def question():
-
-
 
 def addition_questions(message):
     global active_question, active_themes
