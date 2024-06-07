@@ -563,5 +563,4 @@ def callback_worker(call):
                 get_editing(call.from_user.id)
                 break
 
-
 bot.polling(none_stop=True, interval=0)
