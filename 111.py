@@ -13,14 +13,26 @@ active_user_question = {}
 active_user_otvet = {}
 
 
+def load_themes():
+    themes = {}
+    file = open('themes.json', 'r', encoding='utf-8')
+    if file.read():
+        file.seek(0)
+        themes = json.load(file)
+    file.close()
+    return themes
+
+
+def question():
+
+
+
 def addition_questions(message):
     global active_question, active_themes
 
-    file = open('themes.json', 'r', encoding='utf-8')
-    themes = json.load(file)
-    file.close()
+    themes = load_themes()
     file = open('themes.json', 'w', encoding='utf-8')
-    themes[active_themes[message.chat.id]]["questions"][message.text] = {
+    themes[active_themes[message.chat.id]]["question"][message.text] = {
         "otvets": {}
     }
     json.dump(themes, file, ensure_ascii=False)
@@ -35,11 +47,9 @@ def addition_questions(message):
 def addition_otvets(message):
     global active_question, active_themes, active_otvet
 
-    file = open('themes.json', 'r', encoding='utf-8')
-    themes = json.load(file)
-    file.close()
+    themes = load_themes()
     file = open('themes.json', 'w', encoding='utf-8')
-    themes[active_themes[message.chat.id]]["questions"][active_question]["otvets"][message.text] = {}
+    themes[active_themes[message.chat.id]]["question"][active_question]["otvets"][message.text] = {}
     json.dump(themes, file, ensure_ascii=False)
     active_otvet = message.text
     file.close()
@@ -54,11 +64,9 @@ def addition_otvets(message):
 def addition_answer(message):
     global active_themes, active_question, active_otvet
 
-    file = open('themes.json', 'r', encoding='utf-8')
-    themes = json.load(file)
-    file.close()
+    themes = load_themes()
     file = open('themes.json', 'w', encoding='utf-8')
-    themes[active_themes[message.chat.id]]["questions"][active_question]["otvets"][active_otvet] = {
+    themes[active_themes[message.chat.id]]["question"][active_question]["otvets"][active_otvet] = {
             "question": message.text
           }
     json.dump(themes, file, ensure_ascii=False)
@@ -76,9 +84,7 @@ def addition_answer(message):
 def del_theme(chat_id):
     global active_themes
 
-    file = open('themes.json', 'r', encoding='utf-8')
-    themes = json.load(file)
-    file.close()
+    themes = load_themes()
     del themes[active_themes[chat_id]]
     file = open('themes.json', 'w', encoding='utf-8')
     json.dump(themes, file, ensure_ascii=False)
@@ -98,7 +104,7 @@ def del_questions(chat_id):
     file = open('themes.json', 'r', encoding='utf-8')
     themes = json.load(file)
     active_theme = active_themes[chat_id]
-    questions = themes[active_theme]['questions']
+    questions = themes[active_theme]['question']
     file.close()
     keyboard = types.InlineKeyboardMarkup()
     text = 'Выберите вопрос который хотите удалить\n'
@@ -115,11 +121,11 @@ def del_question(chat_id, chosenOption):
     file = open('themes.json', 'r', encoding='utf-8')
     themes = json.load(file)
     active_theme = active_themes[chat_id]
-    questions = themes[active_theme]['questions']
+    questions = themes[active_theme]['question']
     file.close()
     questionsList = list(questions.keys())
     editableQuestion = questionsList[chosenOption - 1]
-    del themes[active_theme]['questions'][editableQuestion]
+    del themes[active_theme]['question'][editableQuestion]
     file = open('themes.json', 'w', encoding='utf-8')
     json.dump(themes, file, ensure_ascii=False)
     file.close()
@@ -138,7 +144,7 @@ def del_otvets(chat_id):
     file = open('themes.json', 'r', encoding='utf-8')
     themes = json.load(file)
     active_theme = active_themes[chat_id]
-    otvets = themes[active_theme]['questions']
+    otvets = themes[active_theme]['question']
     file.close()
     keyboard = types.InlineKeyboardMarkup()
     text = 'Выберите вопрос в котором вы хотите удалить ответ\n'
@@ -155,9 +161,9 @@ def del_otvet(chat_id, chosenOption):
     file = open('themes.json', 'r', encoding='utf-8')
     themes = json.load(file)
     active_theme = active_themes[chat_id]
-    otvets = themes[active_theme]['questions'][active_question]['otvets']
+    otvets = themes[active_theme]['question'][active_question]['otvets']
     file.close()
-    test = list(themes[active_theme]['questions'][active_question]['otvets'].keys())[active_user_otvet[chat_id] - 1]
+    test = list(themes[active_theme]['question'][active_question]['otvets'].keys())[active_user_otvet[chat_id] - 1]
     active_user_otvet[chat_id] = test
     del otvets[test]
     file = open('themes.json', 'w', encoding='utf-8')
@@ -178,8 +184,8 @@ def find_otvet_for_del(chat_id, chosenOption):
     file = open('themes.json', 'r', encoding='utf-8')
     themes = json.load(file)
     active_theme = active_themes[chat_id]
-    active_question = list(themes[active_theme]['questions'].keys())[chosenOption - 1]
-    otvets = themes[active_theme]['questions'][active_question]['otvets']
+    active_question = list(themes[active_theme]['question'].keys())[chosenOption - 1]
+    otvets = themes[active_theme]['question'][active_question]['otvets']
     file.close()
     otvetsList = list(otvets.keys())
     keyboard = types.InlineKeyboardMarkup()
@@ -197,7 +203,7 @@ def edit_otvets(chat_id):
     file = open('themes.json', 'r', encoding='utf-8')
     themes = json.load(file)
     active_theme = active_themes[chat_id]
-    otvets = themes[active_theme]['questions']
+    otvets = themes[active_theme]['question']
     file.close()
     keyboard = types.InlineKeyboardMarkup()
     text = 'Выберите вопрос в котором вы хотите изменить ответ\n'
@@ -215,9 +221,9 @@ def edit_otvet(message):
     file = open('themes.json', 'r', encoding='utf-8')
     themes = json.load(file)
     active_theme = active_themes[chat_id]
-    otvets = themes[active_theme]['questions'][active_question]['otvets']
+    otvets = themes[active_theme]['question'][active_question]['otvets']
     file.close()
-    test = list(themes[active_theme]['questions'][active_question]['otvets'].keys())[active_user_otvet[chat_id] - 1]
+    test = list(themes[active_theme]['question'][active_question]['otvets'].keys())[active_user_otvet[chat_id] - 1]
     active_user_otvet[chat_id] = test
     print(test)
     otvets[message.text] = otvets[active_user_otvet[chat_id]]
@@ -240,17 +246,22 @@ def find_otvet_for_edit(message, chat_id, chosenOption):
     file = open('themes.json', 'r', encoding='utf-8')
     themes = json.load(file)
     active_theme = active_themes[chat_id]
-    active_question = list(themes[active_theme]['questions'].keys())[chosenOption - 1]
-    otvets = themes[active_theme]['questions'][active_question]['otvets']
+    active_question = list(themes[active_theme]['question'].keys())[chosenOption - 1]
+    otvets = themes[active_theme]['question'][active_question]['otvets']
     file.close()
     otvetsList = list(otvets.keys())
     keyboard = types.InlineKeyboardMarkup()
-    text = 'Выберите ответ который хотите изменить\n'
-    for i in range(len(list(otvets.keys()))):
-        text += str(i + 1) + '. ' + list(otvets.keys())[i] + '\n'
-        button = types.InlineKeyboardButton(text=str(i + 1), callback_data='6|' + str(i + 1))
+    if len(list(otvets)) > 0:
+        text = 'Выберите ответ который хотите изменить\n'
+        for i in range(len(list(otvets.keys()))):
+            text += str(i + 1) + '. ' + list(otvets.keys())[i] + '\n'
+            button = types.InlineKeyboardButton(text=str(i + 1), callback_data='6|' + str(i + 1))
+            keyboard.add(button)
+        bot.send_message(chat_id, text=text, reply_markup=keyboard)
+    else:
+        button = types.InlineKeyboardButton(text='Добавить ответ', callback_data='Добавить ответ')
         keyboard.add(button)
-    bot.send_message(chat_id, text=text, reply_markup=keyboard)
+        bot.send_message(chat_id, text='Ответов нет', reply_markup=keyboard)
 
 
 def edit_questions(chat_id):
@@ -259,7 +270,7 @@ def edit_questions(chat_id):
     file = open('themes.json', 'r', encoding='utf-8')
     themes = json.load(file)
     active_theme = active_themes[chat_id]
-    questions = themes[active_theme]['questions']
+    questions = themes[active_theme]['question']
     file.close()
     keyboard = types.InlineKeyboardMarkup()
     text = 'Выберите вопрос который хотите изменить\n'
@@ -277,7 +288,7 @@ def edit_question(message):
     file = open('themes.json', 'r', encoding='utf-8')
     themes = json.load(file)
     active_theme = active_themes[chat_id]
-    questions = themes[active_theme]['questions']
+    questions = themes[active_theme]['question']
     file.close()
     questions[message.text] = questions[active_user_question[chat_id]]
     del questions[active_user_question[chat_id]]
@@ -300,7 +311,7 @@ def find_question_for_edit(message, chat_id, chosenOption):
     file = open('themes.json', 'r', encoding='utf-8')
     themes = json.load(file)
     active_theme = active_themes[chat_id]
-    questions = themes[active_theme]['questions']
+    questions = themes[active_theme]['question']
     file.close()
     questionsList = list(questions.keys())
     editableQuestion = questionsList[chosenOption - 1]
@@ -310,9 +321,7 @@ def find_question_for_edit(message, chat_id, chosenOption):
 
 
 def edit_theme_name(message):
-    file = open('themes.json', 'r', encoding='utf-8')
-    themes = json.load(file)
-    file.close()
+    themes = load_themes()
     value = themes[active_themes[message.chat.id]]
     themes[message.text] = value
     del themes[active_themes[message.chat.id]]
@@ -330,9 +339,6 @@ def edit_theme_name(message):
 
 
 def get_editing(user_id):
-    file = open('themes.json', 'r', encoding='utf-8')
-    themes = json.load(file)
-    file.close()
     keyborddd = types.InlineKeyboardMarkup()
     buttonn1 = types.InlineKeyboardButton(text='1. Изменение темы', callback_data='1. Изменение темы')
     buttonn2 = types.InlineKeyboardButton(text='2. Изменение вопросов', callback_data='2. Изменение вопросов')
@@ -359,26 +365,26 @@ def get_otvet(message):
     otvets = json.load(file)
     file.close()
     file = open('themes.json', 'w', encoding='utf-8')
-    otvets[active_themes[message.chat.id]]["questions"][active_question]["otvets"][message.text] = {}
+    otvets[active_themes[message.chat.id]]["question"][active_question]["otvets"][message.text] = {}
     json.dump(otvets, file, ensure_ascii=False)
     active_otvet = message.text
     file.close()
     bot.send_message(message.from_user.id, text='Ответ успешно добавлен')
     bot.register_next_step_handler(message, get_otvet)
     keyborddd = types.InlineKeyboardMarkup()
-    buttonn1 = types.InlineKeyboardButton(text='Продолжение', callback_data='Продолжение')
+    buttonn1 = types.InlineKeyboardButton(text='Добавить новый ответ', callback_data='Добавить новый ответ')
+    buttonn2 = types.InlineKeyboardButton(text='Продолжение', callback_data='Продолжение')
     keyborddd.add(buttonn1)
-    bot.send_message(message.from_user.id, text='Логическое продолжение диалога (нажмите на кнопку)', reply_markup=keyborddd)
+    keyborddd.add(buttonn2)
+    bot.send_message(message.from_user.id, text='Нажмите на кнопку', reply_markup=keyborddd)
 
 
 def answer_otvet(message):
     global active_themes, active_question, active_otvet
 
-    file = open('themes.json', 'r', encoding='utf-8')
-    themes = json.load(file)
-    file.close()
+    themes = load_themes()
     file = open('themes.json', 'w', encoding='utf-8')
-    themes[active_themes[message.chat.id]]["questions"][active_question]["otvets"][active_otvet] = {
+    themes[active_themes[message.chat.id]]["question"][active_question]["otvets"][active_otvet] = {
             "question": message.text
           }
     json.dump(themes, file, ensure_ascii=False)
@@ -400,7 +406,7 @@ def get_question(message):
     questions = json.load(file)
     file.close()
     file = open('themes.json', 'w', encoding='utf-8')
-    questions[active_themes[message.chat.id]]["questions"][message.text] = {
+    questions[active_themes[message.chat.id]]["question"][message.text] = {
         "otvets": {}
     }
     json.dump(questions, file, ensure_ascii=False)
@@ -418,12 +424,10 @@ def get_question(message):
 def get_theme(message):
     global active_themes
 
-    file = open('themes.json', 'r', encoding='utf-8')
-    themes = json.load(file)
-    file.close()
+    themes = load_themes()
     file = open('themes.json', 'w', encoding='utf-8')
     themes[message.text] = {
-        "questions": {}
+        "question": {}
     }
     json.dump(themes, file, ensure_ascii=False)
     active_themes[message.chat.id] = message.text
@@ -456,21 +460,24 @@ def get_message(message):
         bot.send_message(message.from_user.id, text='Добро пожаловать в телеграм бот (АДМИНИСТРАТОР)')
         bot.send_message(message.from_user.id, text='Выберите одну из перечисленных кнопок', reply_markup=klava)
     else:
-        if active_user_question[message.from_user.id]:
+        if message.from_user.id in active_user_question:
             edit_question(message)
-        elif active_user_otvet[message.from_user.id]:
+        elif message.from_user.id in active_user_otvet:
             edit_otvet(message)
 
 
 def get_exsisting(chat_id):
-    file = open('themes.json', 'r', encoding='utf-8')
-    themes = json.load(file)
-    file.close()
+    themes = load_themes()
     keyboard = types.InlineKeyboardMarkup()
-    for theme in list(themes.keys()):
-        button = types.InlineKeyboardButton(text=theme, callback_data=theme)
+    if len(list(themes.keys())) > 0:
+        for theme in list(themes.keys()):
+            button = types.InlineKeyboardButton(text=theme, callback_data=theme)
+            keyboard.add(button)
+        bot.send_message(chat_id, text='Выберите одну из существующих тем', reply_markup=keyboard)
+    else:
+        button = types.InlineKeyboardButton(text='Добавить новую тему', callback_data='Добавить новую тему')
         keyboard.add(button)
-    bot.send_message(chat_id, text='Выберите одну из существующих тем', reply_markup=keyboard)
+        bot.send_message(chat_id, text='Нет существующих тем', reply_markup=keyboard)
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -498,6 +505,9 @@ def callback_worker(call):
     elif call.data == 'Добавить вопрос к теме':
         bot.send_message(call.from_user.id, text='Напишите вопрос к теме')
         bot.register_next_step_handler(call.message, get_question)
+    elif call.data == 'Добавить новый ответ':
+        bot.send_message(call.from_user.id, text='Напишите ответ')
+        bot.register_next_step_handler(call.message, get_otvet)
     elif call.data == 'Добавить ещё одну тему':
         bot.send_message(call.from_user.id, text='Пожалуйста введите название новой темы')
         bot.register_next_step_handler(call.message, get_theme)
@@ -507,8 +517,11 @@ def callback_worker(call):
     elif call.data == 'Добавить ещё один ответ':
         bot.send_message(call.from_user.id, text='Пожалуйста введите ответ к вопросу')
         bot.register_next_step_handler(call.message, get_otvet)
+    elif call.data == 'Добавить ответ':
+        bot.send_message(call.from_user.id, text='Напишите ответ')
+        bot.register_next_step_handler(call.message, get_otvet)
     elif call.data == 'Продолжение':
-        bot.send_message(call.from_user.id, text='Напишите вопрос к которому перейдёт следующее обращение')
+        bot.send_message(call.from_user.id, text='Логическое продолжение диалога (напишите вопрос)')
         bot.register_next_step_handler(call.message, answer_otvet)
     elif call.data == 'Продолжение диалога':
         bot.send_message(call.from_user.id, text='Напишите вопрос к которому перейдёт следующее обращение')
@@ -562,5 +575,6 @@ def callback_worker(call):
                 active_themes[call.message.chat.id] = theme
                 get_editing(call.from_user.id)
                 break
+
 
 bot.polling(none_stop=True, interval=0)

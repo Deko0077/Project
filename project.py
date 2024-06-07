@@ -234,7 +234,7 @@ def get_message(message):
 
         keyboard = types.InlineKeyboardMarkup()
 
-        file_themes = open('themes_example.json', 'r+', encoding='utf-8')
+        file_themes = open('themes.json', 'r+', encoding='utf-8')
         full_theme = json.load(file_themes)
         for theme in list(full_theme.keys()):
             button_theme = types.InlineKeyboardButton(text=theme, callback_data='theme_'+theme)
@@ -276,9 +276,9 @@ def callback_worker(call):
         active_theme = call.data.split('_')[1]
         keyboard = types.InlineKeyboardMarkup()
 
-        file_themes = open('themes_example.json', 'r+', encoding='utf-8')
+        file_themes = open('themes.json', 'r+', encoding='utf-8')
         full_theme = json.load(file_themes)
-        for questions in list(full_theme['theme']['question'].keys()):
+        for questions in list(full_theme[active_theme]['question'].keys()):
             button_questions = types.InlineKeyboardButton(text=questions, callback_data='question_'+questions)
             keyboard.add(button_questions)
 
@@ -286,9 +286,9 @@ def callback_worker(call):
             active_theme = call.data.split('_')[1]
             keyboard = types.InlineKeyboardMarkup()
 
-            file_themes = open('themes_example.json', 'r+', encoding='utf-8')
+            file_themes = open('themes.json', 'r+', encoding='utf-8')
             full_theme = json.load(file_themes)
-            for questions in list(full_theme['Теннис']['question'].keys()):
+            for questions in list(full_theme[active_theme]['question'].keys()):
                 button_questions = types.InlineKeyboardButton(text=questions, callback_data='question_' + questions)
                 keyboard.add(button_questions)
 
@@ -298,7 +298,7 @@ def callback_worker(call):
         active_question = call.data.split('_')[1]
         keyboard = types.InlineKeyboardMarkup()
 
-        file_themes = open('themes_example.json', 'r+', encoding='utf-8')
+        file_themes = open('themes.json', 'r+', encoding='utf-8')
         full_theme = json.load(file_themes)
         for otvets in full_theme[active_theme]['question'][active_question]['otvets'].keys():
             button_otvets = types.InlineKeyboardButton(text=otvets, callback_data='otvets_' + otvets)
@@ -309,17 +309,24 @@ def callback_worker(call):
     elif call.data.startswith('otvets'):
         active_otvets = call.data.split('_')[1]
 
-        file_themes = open('themes_example.json', 'r+', encoding='utf-8')
+        file_themes = open('themes.json', 'r+', encoding='utf-8')
         full_theme = json.load(file_themes)
         if 'question' in full_theme[active_theme]['question'][active_question]['otvets'][active_otvets]:
             active_question = full_theme[active_theme]['question'][active_question]['otvets'][active_otvets]['question']
-            otvets = full_theme[active_theme]['question'][active_question]['otvets'].keys()
-            keyboard = types.InlineKeyboardMarkup()
+            if active_question in full_theme[active_theme]['question']:
+                otvets = full_theme[active_theme]['question'][active_question]['otvets'].keys()
 
-            for otvet in otvets:
-                button_otvet = types.InlineKeyboardButton(text=otvet, callback_data='otvets_' + otvet)
-                keyboard.add(button_otvet)
-            bot.send_message(call.from_user.id, active_question, parse_mode='Markdown', reply_markup=keyboard)
+                if len(list(otvets)) > 0:
+                    keyboard = types.InlineKeyboardMarkup()
+
+                    for otvet in otvets:
+                        button_otvet = types.InlineKeyboardButton(text=otvet, callback_data='otvets_' + otvet)
+                        keyboard.add(button_otvet)
+                    bot.send_message(call.from_user.id, active_question, parse_mode='Markdown', reply_markup=keyboard)
+                else:
+                    bot.send_message(call.from_user.id, text='На этом всё', parse_mode='Markdown')
+            else:
+                bot.send_message(call.from_user.id, text='На этом всё', parse_mode='Markdown')
 
     # Начало работы команды /info
 
@@ -346,11 +353,9 @@ def callback_worker(call):
                 for i in range(page * limit - limit, min(len(buttons_sport), page * limit)):
                     keyboard.add(buttons_sport[i])
                 if page != 1:
-                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице',
-                                                            callback_data='info_Вернуться к предыдущей странице'))
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='info_Вернуться к предыдущей странице'))
                 if page * limit < len(buttons_sport):
-                    keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу',
-                                                            callback_data='info_Перейти на следующую страницу'))
+                    keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                       text='*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown',
                                       reply_markup=keyboard)
@@ -385,8 +390,7 @@ def callback_worker(call):
                 for i in range(page * limit - limit, min(len(buttons_sport), page * limit)):
                     keyboard.add(buttons_sport[i])
                 if page != 1:
-                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице',
-                                                            callback_data='info_Вернуться к предыдущей странице'))
+                    keyboard.add(types.InlineKeyboardButton(text='Вернуться к предыдущей странице', callback_data='info_Вернуться к предыдущей странице'))
                 if page * limit < len(buttons_sport):
                     keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
                 bot.send_message(call.from_user.id, '*50 видов спорта! Выберите интерисующий вид спорта:*', parse_mode='Markdown', reply_markup=keyboard)
@@ -502,5 +506,6 @@ def callback_worker(call):
                 if page * limit < len(buttons_auto):
                     keyboard.add(types.InlineKeyboardButton(text='Перейти на следующую страницу', callback_data='info_Перейти на следующую страницу'))
                 bot.send_message(call.from_user.id, '*50 модель машин! Выберите интерисующую вас модель машины:*', parse_mode='Markdown', reply_markup=keyboard)
+
 
 bot.polling(none_stop=True, interval=0)
